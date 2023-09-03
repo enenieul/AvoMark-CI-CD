@@ -1,5 +1,5 @@
 version: '3'
-
+Global_VAR: "A global variable"
 stages:
   - build
   - test
