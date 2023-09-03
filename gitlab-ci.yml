@@ -1,0 +1,19 @@
+version: '3'
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - echo "Construction de l'application PHP ici"
+    
+    - composer install --no-ansi --no-interaction --no-progress --no-scripts
+
+test:
+  stage: test
+  script:
+    - echo "Exécution des tests PHP ici"
+   
+    - vendor/bin/phpunit
