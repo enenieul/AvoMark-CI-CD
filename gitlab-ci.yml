@@ -1,19 +1,23 @@
 version: '3'
-Global_VAR: "A global variable"
+
+
 stages:
   - build
   - test
+  - deploy
 
 build:
   stage: build
   script:
-    - echo "Construction de l'application PHP ici"
-    
-    - composer install --no-ansi --no-interaction --no-progress --no-scripts
+    - echo "Construction de l'image Docker"
+    - docker build -t monapp:latest . 
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY 
+    - docker push $CI_REGISTRY_IMAGE  # Pousser l'image vers le registre Docker
+  only:
+    - master  
 
 test:
   stage: test
   script:
-    - echo "Exécution des tests PHP ici"
-   
-    - vendor/bin/phpunit
+    - echo "Ex
+
